@@ -1,0 +1,86 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+def CLASS_ACTIVATOR = 'com.beolnix.marvin.im.plugin.Activator'
+def CLASS_PLUGIN = 'com.beolnix.marvin.im.plugin.NewYearIMPlugin'
+def BUNDLE_NAME = 'New Year plugin'
+def BUNDLE_DESC = 'backward counting to new years celebration'
+def VENDOR = 'com.beolnix'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+System.setProperty("file.encoding", "UTF-8")
+
+project.group = 'com.beolnix.marvin'
+project.version = '0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url "http://nexus.beolnix.com/content/repositories/releases/"
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            if (version.toString().endsWith("SNAPSHOT")) {
+                repository(url: "http://nexus.beolnix.com/content/repositories/snapshots/") {
+                    authentication(userName: System.getenv()['REPO_USER'], password: System.getenv()['REPO_SNAPSHOT_PASSWORD'])
+                }
+            } else {
+                repository(url: "http://nexus.beolnix.com/content/repositories/releases/") {
+                    authentication(userName: System.getenv()['REPO_USER'], password: System.getenv()['REPO_RELEASE_PASSWORD'])
+                }
+            }
+            pom.version = version
+            pom.artifactId = "newyear-plugin"
+            pom.groupId = "com.beolnix.marvin"
+        }
+    }
+}
+
+configurations { provided }
+
+sourceSets {
+    main { compileClasspath += configurations.provided }
+}
+
+
+dependencies {
+    compile "com.beolnix.marvin:api:0.1"
+    compile "com.beolnix.marvin:plugin-utils:0.1"
+    compile "org.apache.felix:org.apache.felix.framework:4.0.1"
+
+    compile "org.codehaus.groovy:groovy-all:2.4.4"
+    compile 'xml-apis:xml-apis:1.3.04'
+
+    compile "log4j:log4j:1.2.16"
+
+    testCompile "junit:junit:4.12"
+}
+
+jar {
+    def cp = '.'
+    configurations.runtime.resolve().flatten() { File file
+        -> file.name
+    }.unique().each { aJar ->  cp = cp + ",${aJar}" }
+
+    manifest {
+        attributes 'Bundle-Name': BUNDLE_NAME,
+                'Bundle-SymbolicName': BUNDLE_NAME,
+                'Bundle-Description': BUNDLE_DESC,
+                'Bundle-Vendor': VENDOR,
+                'Bundle-Version': project.version.toString().replace("-SNAPSHOT", ""),
+                'Bundle-Activator': CLASS_ACTIVATOR,
+                'Export-Package': CLASS_PLUGIN,
+                'Import-Package': 'org.osgi.framework,com.beolnix.marvin.im.api,com.beolnix.marvin.im.api.error,com.beolnix.marvin.plugins.api',
+                'Bundle-ClassPath': cp
+    }
+
+    from configurations.runtime
+}
+
+
