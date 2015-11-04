@@ -13,7 +13,7 @@ targetCompatibility = '1.8'
 System.setProperty("file.encoding", "UTF-8")
 
 project.group = 'com.beolnix.marvin'
-project.version = '0.1-SNAPSHOT'
+project.version = '0.1'
 
 repositories {
     mavenCentral()
