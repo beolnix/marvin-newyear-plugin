@@ -49,9 +49,9 @@ sourceSets {
 }
 
 
-dependencies {
-    compile "com.beolnix.marvin:api:0.1"
-    compile "com.beolnix.marvin:plugin-utils:0.1"
+dependencies {    
+    compile "com.beolnix.marvin:api:0.2-SNAPSHOT"
+    compile "com.beolnix.marvin:plugin-utils:0.2-SNAPSHOT"
     compile "org.apache.felix:org.apache.felix.framework:4.0.1"
 
     compile "org.codehaus.groovy:groovy-all:2.4.4"
@@ -76,7 +76,7 @@ jar {
                 'Bundle-Version': project.version.toString().replace("-SNAPSHOT", ""),
                 'Bundle-Activator': CLASS_ACTIVATOR,
                 'Export-Package': CLASS_PLUGIN,
-                'Import-Package': 'org.osgi.framework,com.beolnix.marvin.im.api,com.beolnix.marvin.im.api.error,com.beolnix.marvin.plugins.api',
+                'Import-Package': 'org.osgi.framework,com.beolnix.marvin.im.api,com.beolnix.marvin.im.api.model,com.beolnix.marvin.im.api.error,com.beolnix.marvin.plugins.api,com.beolnix.marvin.plugins.api.error,com.beolnix.marvin.config.api,com.beolnix.marvin.config.api.model,com.beolnix.marvin.config.api.error',
                 'Bundle-ClassPath': cp
     }
 
