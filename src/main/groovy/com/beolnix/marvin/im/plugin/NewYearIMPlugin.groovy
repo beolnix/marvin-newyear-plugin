@@ -9,6 +9,8 @@ import com.beolnix.marvin.plugins.api.IMPluginState
 import org.apache.log4j.Logger
 import org.osgi.framework.BundleContext
 
+import java.util.stream.Collectors
+
 /**
  * Author: beolnix
  * Email: beolnix@gmail.com
@@ -22,13 +24,10 @@ class NewYearIMPlugin implements IMPlugin {
 
     private IMPluginState state = IMPluginState.NOT_INITIALIZED
     private String errMsg
-    private PluginUtils
 
     public static final String COMMAND_NY = 'ny'
     public static final String COMMAND_MONEY = 'money'
     public static final String COMMAND_HELP = 'help'
-
-    private Calendar ny
 
     public NewYearIMPlugin(BundleContext bundleContext) {
         logger = new PluginUtils().getLogger(bundleContext, getPluginName())
@@ -61,25 +60,35 @@ class NewYearIMPlugin implements IMPlugin {
         return false
     }
 
-    private void sendAnwer(IMIncomingMessage msg, String answer) {
+    private IMOutgoingMessage[] createOutMsges(IMIncomingMessage msg, String... answers) {
+        def result = new ArrayList<>()
+        for (String answer : answers) {
+            result.add(createOutMsg(msg, answer))
+        }
+        return (IMOutgoingMessage[]) result.toArray()
+    }
+
+    private IMOutgoingMessage createOutMsg(IMIncomingMessage msg, String answer) {
         IMOutgoingMessage outMsg = new IMOutgoingMessageBuilder(msg)
-                .withRecipient(msg.getAuthor())
                 .withRawMessageBody(answer)
                 .withFromPlugin(getPluginName())
                 .build();
-        imSessionManager.sendMessage(outMsg)
     }
 
     @Override
     public void process(IMIncomingMessage msg) {
         try {
             if (msg.getCommandName().equals(COMMAND_NY)) {
-                sendAnwer(msg, getNyAnswer())
+                imSessionManager.sendMessage(createOutMsg(msg, getNyAnswer()))
             } else if (msg.commandName.equals(COMMAND_MONEY)) {
-                sendAnwer(msg, getMoneyAnswer())
+                imSessionManager.sendMessage(createOutMsg(msg, getMoneyAnswer()))
             } else if (msg.getCommandName().equals(COMMAND_HELP)) {
-                sendAnwer(msg, msg.commandSymbol + "$COMMAND_NY - сообщает сколько осталось до ближайшего нового года")
-                sendAnwer(msg, msg.commandSymbol + "$COMMAND_MONEY - сообщает сколько осталось до 20-го числа текущего месяца")
+                imSessionManager.sendMessage(
+                        createOutMsges(msg,
+                            msg.commandSymbol + "$COMMAND_NY - сообщает сколько осталось до ближайшего нового года",
+                            "$COMMAND_MONEY - сообщает сколько осталось до 20-го числа текущего месяца"
+                        )
+                )
             }
         } catch (Throwable e) {
             logger.error(e.getMessage(), e)
