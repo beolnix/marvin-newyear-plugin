@@ -39,7 +39,7 @@ uploadArchives {
                 }
             }
             pom.version = version
-            pom.artifactId = "newyear-plugin"
+            pom.artifactId = "marvin-newyear-plugin"
             pom.groupId = "com.beolnix.marvin"
         }
     }
@@ -53,8 +53,8 @@ sourceSets {
 
 
 dependencies {    
-    compile "com.beolnix.marvin:api:0.2-SNAPSHOT"
-    compile "com.beolnix.marvin:plugin-utils:0.2-SNAPSHOT"
+    compile "com.beolnix.marvin:marvin-api:0.2-SNAPSHOT"
+    compile "com.beolnix.marvin:marvin-plugin-utils:0.2-SNAPSHOT"
     compile "org.apache.felix:org.apache.felix.framework:4.0.1"
 
     compile "org.codehaus.groovy:groovy-all:2.4.4"
