@@ -1,5 +1,5 @@
 ## Project description
-One more example plugin for [marvin](https://github.com/beolnix/marvin-core/) bot.
+One more example plugin for [marvin](https://github.com/beolnix/marvin/) bot.
 Plugin displays count down for New Year and Salary
 
 ### Supported commands
@@ -30,7 +30,7 @@ gradle clean build
 If everything is fine, you find **newyear-plugin-0.1.jar** in **build/libs/** 
 
 ## Usage 
-To deploy the plugin simply copy it to the plugins directory of [marvin](https://github.com/beolnix/marvin-core/) bot.
+To deploy the plugin simply copy it to the plugins directory of [marvin](https://github.com/beolnix/marvin/) bot.
 No restart is required, marvin will pick it up on the fly and tell you about it in his **logs/application-main.log**.
 Once it is deployed simply send a message directly to the bot or to the conference with it.
 
