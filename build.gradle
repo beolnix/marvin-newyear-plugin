@@ -63,7 +63,7 @@ sourceSets {
 
 dependencies {    
     compile group: 'com.beolnix.marvin', name: 'marvin-api', version: MARVIN_API_VERSION, changing: true
-    compile "com.beolnix.marvin:marvin-plugin-utils:${MARVIN_UTILS_VERSION}"
+    compile group: 'com.beolnix.marvin', name: 'marvin-plugin-utils', version: MARVIN_UTILS_VERSION, changing: true
     compile "org.apache.felix:org.apache.felix.framework:4.0.1"
 
     compile "org.codehaus.groovy:groovy-all:${GROOVY_VERSION}"
