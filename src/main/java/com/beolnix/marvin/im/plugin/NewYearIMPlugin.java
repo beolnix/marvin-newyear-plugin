@@ -38,7 +38,9 @@ public class NewYearIMPlugin implements IMPlugin {
 
     @Override
     public String getPluginName() {
-        logger.trace("getPluginName invoked");
+        if (logger != null) {
+            logger.trace("getPluginName invoked");
+        }
         return "newYearPlugin";
     }
 
