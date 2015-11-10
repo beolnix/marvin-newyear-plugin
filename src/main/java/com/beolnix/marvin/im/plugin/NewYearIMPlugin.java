@@ -67,21 +67,20 @@ public class NewYearIMPlugin implements IMPlugin {
             imSessionManager.sendMessage(createOutMsg(imIncomingMessage, countDownService.getMoneyCountDown()));
         } else if (COMMAND_HELP.equals(imIncomingMessage.getCommandName())) {
             imSessionManager.sendMessage(
-                    createOutMsges(imIncomingMessage,
-                            imIncomingMessage.getCommandSymbol() + COMMAND_NY + " - сообщает сколько осталось до ближайшего нового года",
+                    createOutMsg(
+                            imIncomingMessage,
+                            imIncomingMessage.getCommandSymbol() + COMMAND_NY + " - сообщает сколько осталось до ближайшего нового года"
+                    ),
+                    createOutMsg(
+                            imIncomingMessage,
                             imIncomingMessage.getCommandSymbol() + COMMAND_MONEY + " - сообщает сколько осталось до 20-го числа текущего месяца"
                     )
             );
+
         }
     }
 
-    private IMOutgoingMessage[] createOutMsges(IMIncomingMessage msg, String... answers) {
-        List<IMOutgoingMessage> result = new ArrayList<>();
-        for (String answer : answers) {
-            result.add(createOutMsg(msg, answer));
-        }
-        return (IMOutgoingMessage[]) result.toArray();
-    }
+
 
     private IMOutgoingMessage createOutMsg(IMIncomingMessage msg, String answer) {
         return new IMOutgoingMessageBuilder(msg)

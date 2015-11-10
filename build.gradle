@@ -9,8 +9,8 @@ def BUNDLE_DESC = 'backward counting to new years celebration'
 def VENDOR = 'com.beolnix'
 
 def JDK_VERSION = '1.8'
-def MARVIN_API_VERSION = '0.3-SNAPSHOT'
-def MARVIN_UTILS_VERSION = '0.3-SNAPSHOT'
+def MARVIN_API_VERSION = '0.2'
+def MARVIN_UTILS_VERSION = '0.2'
 def LOG4J_VERSION = '1.2.16'
 def FELIX_VERSION = '4.0.1'
 def GROOVY_VERSION = '2.4.4'
@@ -22,7 +22,7 @@ targetCompatibility = JDK_VERSION
 System.setProperty("file.encoding", "UTF-8")
 
 project.group = 'com.beolnix.marvin'
-project.version = '0.3-SNAPSHOT'
+project.version = '0.2'
 
 repositories {
     mavenCentral()
