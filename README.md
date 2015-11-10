@@ -9,7 +9,7 @@ Plugin displays count down for New Year and Salary
 ## Project details
 | Version | State | Source code | Binaries |
 | --- | --- | --- | --- |
-| 0.2 | Stable | [0.2-release](https://github.com/beolnix/marvin-newyear-plugin/releases/tag/0.2-release) | [newyear-plugin-0.2.jar](http://nexus.beolnix.com/service/local/repositories/releases/content/com/beolnix/marvin/newyear-plugin/0.2/newyear-plugin-0.2.jar) |
+| 0.2 | Stable | [0.2-release](https://github.com/beolnix/marvin-newyear-plugin/releases/tag/0.2-release) | [marvin-newyear-plugin-0.2.jar](http://nexus.beolnix.com/service/local/repositories/releases/content/com/beolnix/marvin/marvin-newyear-plugin/0.2/marvin-newyear-plugin-0.2.jar) |
 | 0.3-SNAPSHOT | In dev | [master](https://github.com/beolnix/marvin-newyear-plugin) |  |
 
 ## Requirements
