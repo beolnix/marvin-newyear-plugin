@@ -13,8 +13,6 @@ public class CountDownService {
     private final static int SECS_IN_HOUR_FACTOR = SECS_IN_MINUTE_FACTOR * 60;
     private final static int SECS_IN_DAY_FACTOR = SECS_IN_HOUR_FACTOR * 24;
 
-    private final static int SALARY_DAY_IN_MONTH = 5;
-
     private HumanReadableDateUtils hrDateUtils = new HumanReadableDateUtils();
 
 
@@ -25,21 +23,6 @@ public class CountDownService {
         LocalDateTime toDateTime = LocalDateTime.of(year, 12, 31, 23, 59, 59);
 
         return "до нового года осталось " + getHumanReadableCountDownTo(fromDateTime, toDateTime);
-    }
-
-    public String getMoneyCountDown() {
-        int year = LocalDateTime.now().getYear();
-        int month = LocalDateTime.now().getMonth().getValue();
-
-        LocalDateTime fromDateTime = LocalDateTime.now();
-
-        if (fromDateTime.getDayOfMonth() > SALARY_DAY_IN_MONTH) {
-            month += 1;
-        }
-
-        LocalDateTime toDate = LocalDateTime.of(year, month, 5, 19, 0, 1);
-
-        return "до зарплаты осталось " + getHumanReadableCountDownTo(fromDateTime, toDate);
     }
 
     private String getHumanReadableCountDownTo(LocalDateTime fromDateTime, LocalDateTime toDateTime) {
