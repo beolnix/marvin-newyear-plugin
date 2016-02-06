@@ -11,7 +11,7 @@ public class Activator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) {
-        IMPlugin plugin = new NewYearIMPlugin(context);
+        IMPlugin plugin = new NewYearIMPlugin();
         context.registerService(IMPlugin.class.getName(), plugin, null);
     }
 

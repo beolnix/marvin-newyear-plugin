@@ -1,14 +1,13 @@
 package com.beolnix.marvin.im.plugin;
 
-import com.beolnix.marvin.config.api.model.PluginConfig;
 import com.beolnix.marvin.im.api.IMSessionManager;
 import com.beolnix.marvin.im.api.model.IMIncomingMessage;
 import com.beolnix.marvin.im.api.model.IMOutgoingMessage;
 import com.beolnix.marvin.im.api.model.IMOutgoingMessageBuilder;
 import com.beolnix.marvin.plugins.api.IMPlugin;
 import com.beolnix.marvin.plugins.api.IMPluginState;
+import com.beolnix.marvin.plugins.api.PluginConfig;
 import org.apache.log4j.Logger;
-import org.osgi.framework.BundleContext;
 
 import java.util.*;
 
@@ -17,7 +16,7 @@ import java.util.*;
  */
 public class NewYearIMPlugin implements IMPlugin {
 
-    private final Logger logger;
+    private Logger logger;
     private final CountDownService countDownService = new CountDownService();
     private IMSessionManager imSessionManager;
     private IMPluginState state = IMPluginState.NOT_INITIALIZED;
@@ -26,19 +25,11 @@ public class NewYearIMPlugin implements IMPlugin {
     private static final String COMMAND_HELP = "help";
     private static final List<String> commandsList = Arrays.asList(COMMAND_NY, COMMAND_HELP);
 
-    public NewYearIMPlugin(BundleContext bundleContext) {
-        logger = new PluginUtils().getLogger(bundleContext, getPluginName());
-    }
-
     @Override
-    public void setIMSessionManager(IMSessionManager imSessionManager) {
+    public void init(PluginConfig pluginConfig, IMSessionManager imSessionManager) {
+        this.logger = pluginConfig.getLogger();
         this.imSessionManager = imSessionManager;
         this.state = IMPluginState.INITIALIZED;
-    }
-
-    @Override
-    public void setPluginConfig(PluginConfig pluginConfig) {
-        // nop since newyearplugin doesn't require any configuration
     }
 
     @Override
