@@ -3,21 +3,21 @@ package com.beolnix.marvin.im.plugin;
 /**
  * Created by DAtmakin on 11/9/2015.
  */
-public class HumanReadableDateUtils {
+public class ENHumanReadableDateUtils {
     public String getSeconds(long seconds) {
-        return getSmartEnd(seconds, "секунда", "секунды", "секунд");
+        return getSmartEnd(seconds, "second", "seconds", "seconds");
     }
 
     public String getMinutes(long minutes) {
-        return getSmartEnd(minutes, "минута", "минуты", "минут");
+        return getSmartEnd(minutes, "minute", "minutes", "minutes");
     }
 
     public String getHours(long hours) {
-        return getSmartEnd(hours, "час", "часа", "часов");
+        return getSmartEnd(hours, "hour", "hours", "hours");
     }
 
     public String getDays(long days) {
-        return getSmartEnd(days, "день", "дня", "дней");
+        return getSmartEnd(days, "day", "days", "days");
     }
 
     private String getSmartEnd(long number, String end1, String end2, String end3) {

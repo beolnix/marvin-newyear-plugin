@@ -17,13 +17,15 @@ import java.util.*;
 public class NewYearIMPlugin implements IMPlugin {
 
     private Logger logger;
-    private final CountDownService countDownService = new CountDownService();
+    private final RUCountDownService ruCountDownService = new RUCountDownService();
+    private final ENCountDownService enCountDownService = new ENCountDownService();
     private IMSessionManager imSessionManager;
     private IMPluginState state = IMPluginState.NOT_INITIALIZED;
 
     private static final String COMMAND_NY = "ny";
+    private static final String COMMAND_NY_RU = "ny-ru";
     private static final String COMMAND_HELP = "help";
-    private static final List<String> commandsList = Arrays.asList(COMMAND_NY, COMMAND_HELP);
+    private static final List<String> commandsList = Arrays.asList(COMMAND_NY, COMMAND_NY_RU, COMMAND_HELP);
 
     @Override
     public void init(PluginConfig pluginConfig, IMSessionManager imSessionManager) {
@@ -59,12 +61,18 @@ public class NewYearIMPlugin implements IMPlugin {
     @Override
     public void process(IMIncomingMessage imIncomingMessage) {
         if (COMMAND_NY.equals(imIncomingMessage.getCommandName())) {
-            imSessionManager.sendMessage(createOutMsg(imIncomingMessage, countDownService.getNewYearCountDown()));
+            imSessionManager.sendMessage(createOutMsg(imIncomingMessage, enCountDownService.getNewYearCountDown()));
+        } else if (COMMAND_NY_RU.equals(imIncomingMessage.getCommandName())) {
+            imSessionManager.sendMessage(createOutMsg(imIncomingMessage, ruCountDownService.getNewYearCountDown()));
         } else if (COMMAND_HELP.equals(imIncomingMessage.getCommandName())) {
             imSessionManager.sendMessage(
                     createOutMsg(
                             imIncomingMessage,
-                            imIncomingMessage.getCommandSymbol() + COMMAND_NY + " - сообщает сколько осталось до ближайшего нового года"
+                            imIncomingMessage.getCommandSymbol() + COMMAND_NY + " - New Year countdown"
+                    ),
+                    createOutMsg(
+                            imIncomingMessage,
+                            imIncomingMessage.getCommandSymbol() + COMMAND_NY_RU + " - New Year countdown in russian"
                     )
             );
 

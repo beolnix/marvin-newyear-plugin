@@ -3,17 +3,16 @@ package com.beolnix.marvin.im.plugin;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by beolnix on 11/9/2015.
  */
-public class CountDownService {
+public class ENCountDownService {
     private final static int SECS_IN_MINUTE_FACTOR = 60;
     private final static int SECS_IN_HOUR_FACTOR = SECS_IN_MINUTE_FACTOR * 60;
     private final static int SECS_IN_DAY_FACTOR = SECS_IN_HOUR_FACTOR * 24;
 
-    private HumanReadableDateUtils hrDateUtils = new HumanReadableDateUtils();
+    private ENHumanReadableDateUtils hrDateUtils = new ENHumanReadableDateUtils();
 
 
     public String getNewYearCountDown() {
@@ -22,7 +21,7 @@ public class CountDownService {
         LocalDateTime fromDateTime = LocalDateTime.now();
         LocalDateTime toDateTime = LocalDateTime.of(year, 12, 31, 23, 59, 59);
 
-        return "до нового года осталось " + getHumanReadableCountDownTo(fromDateTime, toDateTime);
+        return "New Year is coming in: " + getHumanReadableCountDownTo(fromDateTime, toDateTime);
     }
 
     private String getHumanReadableCountDownTo(LocalDateTime fromDateTime, LocalDateTime toDateTime) {
@@ -49,8 +48,8 @@ public class CountDownService {
         int pastFactor = 1;
         String ending = ".";
         if ((days + hours + minutes + seconds) < 0) {
-            resultBuilder.append("- уже прошло: ");
-            ending = " с того момента.";
+            resultBuilder.append("- passed: ");
+            ending = " since that moment.";
             pastFactor *= -1;
         }
 
@@ -71,7 +70,7 @@ public class CountDownService {
         }
 
         if (answersList.size() == 0) {
-            resultBuilder.append("- нисколько не осталось");
+            resultBuilder.append("- it is a New Year time!");
         } else if (answersList.size() == 1) {
             resultBuilder.append(answersList.get(0));
         } else {
@@ -80,7 +79,7 @@ public class CountDownService {
             for (String result : answersList) {
                 if (currentMember == numberOfLastMember) {
                     resultBuilder
-                            .append(" и ")
+                            .append(" and ")
                             .append(result);
                 } else if (currentMember == 1) {
                     resultBuilder.append(result);

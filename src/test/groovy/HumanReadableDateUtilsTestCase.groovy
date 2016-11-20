@@ -1,5 +1,4 @@
-import com.beolnix.marvin.im.plugin.CountDownService
-import com.beolnix.marvin.im.plugin.HumanReadableDateUtils
+import com.beolnix.marvin.im.plugin.RUHumanReadableDateUtils
 import org.junit.Test
 
 import static org.junit.Assert.assertEquals;
@@ -15,21 +14,21 @@ class HumanReadableDateUtilsTestCase {
 
     @Test
     public void testGetMinutes() {
-        assertEquals("12 минут", new HumanReadableDateUtils().getMinutes(12))
+        assertEquals("12 минут", new RUHumanReadableDateUtils().getMinutes(12))
     }
 
     @Test
     public void testGetSeconds() {
-        assertEquals("51 секунда", new HumanReadableDateUtils().getSeconds(51))
+        assertEquals("51 секунда", new RUHumanReadableDateUtils().getSeconds(51))
     }
 
     @Test
     public void testGetHours() {
-        assertEquals("2 часа", new HumanReadableDateUtils().getHours(2))
+        assertEquals("2 часа", new RUHumanReadableDateUtils().getHours(2))
     }
 
     @Test
     public void testGetDays() {
-        assertEquals("47 дней", new HumanReadableDateUtils().getDays(47))
+        assertEquals("47 дней", new RUHumanReadableDateUtils().getDays(47))
     }
 }
