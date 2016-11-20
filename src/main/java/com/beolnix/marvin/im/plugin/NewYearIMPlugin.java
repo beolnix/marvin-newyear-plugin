@@ -23,9 +23,10 @@ public class NewYearIMPlugin implements IMPlugin {
     private IMPluginState state = IMPluginState.NOT_INITIALIZED;
 
     private static final String COMMAND_NY = "ny";
+    private static final String COMMAND_XMAS = "xmas";
     private static final String COMMAND_NY_RU = "ny-ru";
     private static final String COMMAND_HELP = "help";
-    private static final List<String> commandsList = Arrays.asList(COMMAND_NY, COMMAND_NY_RU, COMMAND_HELP);
+    private static final List<String> commandsList = Arrays.asList(COMMAND_NY, COMMAND_NY_RU, COMMAND_XMAS, COMMAND_HELP);
 
     @Override
     public void init(PluginConfig pluginConfig, IMSessionManager imSessionManager) {
@@ -64,6 +65,8 @@ public class NewYearIMPlugin implements IMPlugin {
             imSessionManager.sendMessage(createOutMsg(imIncomingMessage, enCountDownService.getNewYearCountDown()));
         } else if (COMMAND_NY_RU.equals(imIncomingMessage.getCommandName())) {
             imSessionManager.sendMessage(createOutMsg(imIncomingMessage, ruCountDownService.getNewYearCountDown()));
+        } else if (COMMAND_XMAS.equals(imIncomingMessage.getCommandName())) {
+            imSessionManager.sendMessage(createOutMsg(imIncomingMessage, enCountDownService.getXmasCountDown()));
         } else if (COMMAND_HELP.equals(imIncomingMessage.getCommandName())) {
             imSessionManager.sendMessage(
                     createOutMsg(
@@ -73,6 +76,10 @@ public class NewYearIMPlugin implements IMPlugin {
                     createOutMsg(
                             imIncomingMessage,
                             imIncomingMessage.getCommandSymbol() + COMMAND_NY_RU + " - New Year countdown in russian"
+                    ),
+                    createOutMsg(
+                            imIncomingMessage,
+                            imIncomingMessage.getCommandSymbol() + COMMAND_XMAS + " - Christmas Day countdown"
                     )
             );
 

@@ -2,7 +2,9 @@ package com.beolnix.marvin.im.plugin;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.LinkedList;
+import java.util.TimeZone;
 
 /**
  * Created by beolnix on 11/9/2015.
@@ -14,12 +16,36 @@ public class ENCountDownService {
 
     private ENHumanReadableDateUtils hrDateUtils = new ENHumanReadableDateUtils();
 
+    public String getXmasCountDown() {
+        int year = LocalDateTime.now().getYear();
+
+        LocalDateTime fromDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin"));
+
+        LocalDateTime toDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin"))
+                .withYear(year)
+                .withMonth(12)
+                .withDayOfMonth(24)
+                .withHour(23)
+                .withMinute(59)
+                .withSecond(59);
+        toDateTime.atZone(ZoneId.of("Europe/Berlin"));
+
+        return "Christmas Day is coming in: " + getHumanReadableCountDownTo(fromDateTime, toDateTime);
+    }
 
     public String getNewYearCountDown() {
         int year = LocalDateTime.now().getYear();
 
-        LocalDateTime fromDateTime = LocalDateTime.now();
-        LocalDateTime toDateTime = LocalDateTime.of(year, 12, 31, 23, 59, 59);
+        LocalDateTime fromDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin"));
+
+        LocalDateTime toDateTime = LocalDateTime.now(ZoneId.of("Europe/Berlin"))
+            .withYear(year)
+                .withMonth(12)
+                .withDayOfMonth(31)
+                .withHour(23)
+                .withMinute(59)
+                .withSecond(59);
+        toDateTime.atZone(ZoneId.of("Europe/Berlin"));
 
         return "New Year is coming in: " + getHumanReadableCountDownTo(fromDateTime, toDateTime);
     }
